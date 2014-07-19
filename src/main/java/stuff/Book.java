@@ -1,9 +1,25 @@
 package stuff;
 
 public class Book {
-    public static IntegerColumnReference BOOK_ID = new IntegerColumnReference("BOOK", "BOOK_ID");
-    public static StringColumnReference TITLE = new StringColumnReference("BOOK", "TITLE");
-    public static IntegerColumnReference AUTHOR_ID = new IntegerColumnReference("BOOK", "AUTHOR_ID");
+    public final IntegerColumnReference BOOK_ID;
+    public final StringColumnReference TITLE;
+    public final IntegerColumnReference AUTHOR_ID;
 
-    public static Book NullBook = new Book();
+    private final String reference;
+
+    public Book(String reference) {
+        this.reference = reference;
+
+        BOOK_ID = new IntegerColumnReference(reference, "BOOK_ID");
+        TITLE = new StringColumnReference(reference, "TITLE");
+        AUTHOR_ID = new IntegerColumnReference(reference, "AUTHOR_ID");
+    }
+
+    public static Book as(String reference) {
+        return new Book(reference);
+    }
+
+    public static Book ref() {
+        return new Book("BOOK");
+    }
 }

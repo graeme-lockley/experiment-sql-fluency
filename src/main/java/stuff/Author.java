@@ -1,9 +1,24 @@
 package stuff;
 
-public class Author {
-    public static IntegerColumnReference AUTHOR_ID = new IntegerColumnReference("AUTHOR", "AUTHOR_ID");
-    public static IntegerColumnReference ID_NUMBER = new IntegerColumnReference("AUTHOR", "ID_NUMBER");
-    public static StringColumnReference NAME = new StringColumnReference("AUTHOR", "NAME");
+public class Author implements TableRef {
+    public final IntegerColumnReference AUTHOR_ID;
+    public final IntegerColumnReference ID_NUMBER;
+    public final StringColumnReference NAME;
+    private final String reference;
 
-    public static Author NullAuthor = null;
+    private Author(String reference) {
+        this.reference = reference;
+
+        AUTHOR_ID = new IntegerColumnReference(reference, "AUTHOR_ID");
+        ID_NUMBER = new IntegerColumnReference(reference, "ID_NUMBER");
+        NAME = new StringColumnReference(reference, "NAME");
+    }
+
+    public static Author as(String a) {
+        return new Author(a);
+    }
+
+    public static Author ref() {
+        return new Author("AUTHOR");
+    }
 }
