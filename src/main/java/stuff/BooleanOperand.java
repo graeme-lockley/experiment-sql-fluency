@@ -1,6 +1,6 @@
 package stuff;
 
-public class BooleanOperand implements BooleanType {
+public abstract class BooleanOperand implements BooleanType {
     public BooleanOperand and(BooleanType booleanType) {
         return new AndOperator(this, booleanType);
     }

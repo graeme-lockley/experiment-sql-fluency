@@ -17,4 +17,13 @@ class LikeOperator extends BooleanOperand implements BinaryOperator<StringType, 
     public String toString() {
         return left.toString() + " LIKE " + right.toString();
     }
+
+    @Override
+    public String asString(int precedence) {
+        if (precedence > 50) {
+            return "(" + left.asString(50) + " LIKE " + right.asString(50) + ")";
+        } else {
+            return left.asString(50) + " LIKE " + right.asString(50);
+        }
+    }
 }

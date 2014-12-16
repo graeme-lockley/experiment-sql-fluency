@@ -10,4 +10,9 @@ public class TrimOperation extends StringOperation implements OrderByExpression 
     public String toString() {
         return "TRIM(" + item.toString() + ")";
     }
+
+    @Override
+    public String asString(int precedence) {
+        return "TRIM(" + item.asString(0) + ")";
+    }
 }

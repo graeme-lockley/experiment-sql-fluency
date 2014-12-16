@@ -10,4 +10,9 @@ class IntegerConstant implements IntegerType {
     public String toString() {
         return Integer.toString(value);
     }
+
+    @Override
+    public String asString(int precedence) {
+        return Integer.toString(value);
+    }
 }

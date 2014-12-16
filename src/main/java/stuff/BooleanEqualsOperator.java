@@ -17,4 +17,13 @@ class BooleanEqualsOperator extends BooleanOperation {
     public String toString() {
         return left.toString() + " = " + right.toString();
     }
+
+    @Override
+    public String asString(int precedence) {
+        if (precedence > 40) {
+            return "(" + left.asString(40) + " = " + right.asString(40) + ")";
+        } else {
+            return left.asString(40) + " = " + right.asString(40);
+        }
+    }
 }

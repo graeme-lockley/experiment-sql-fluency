@@ -26,7 +26,7 @@ public class MainTest {
                                 .and(author.AUTHOR_ID.eq(book.AUTHOR_ID)))
                 .orderBy((author, book) -> Arrays.asList((OrderByExpression) author.NAME));
 
-        assertEquals("AUTHOR as A, BOOK as B WHERE ((A.NAME LIKE '%LOCKLEY%') AND ((B.TITLE LIKE '%RINGS%') OR (B.TITLE LIKE '%HOBBIT%'))) AND A.AUTHOR_ID = B.AUTHOR_ID", query.asString());
+        assertEquals("AUTHOR as A, BOOK as B WHERE A.NAME LIKE '%LOCKLEY%' AND (B.TITLE LIKE '%RINGS%' OR B.TITLE LIKE '%HOBBIT%') AND A.AUTHOR_ID = B.AUTHOR_ID", query.asString());
     }
 
     @Test
@@ -40,6 +40,6 @@ public class MainTest {
                                         .or(book.TITLE.like("%HOBBIT%"))))
                 .orderBy((author, book) -> Arrays.asList((OrderByExpression) author.NAME));
 
-        assertEquals("AUTHOR as A, BOOK as B WHERE A.AUTHOR_ID = B.AUTHOR_ID AND (A.NAME LIKE '%LOCKLEY%') AND ((B.TITLE LIKE '%RINGS%') OR (B.TITLE LIKE '%HOBBIT%'))", query.asString());
+        assertEquals("AUTHOR as A, BOOK as B WHERE A.AUTHOR_ID = B.AUTHOR_ID AND A.NAME LIKE '%LOCKLEY%' AND (B.TITLE LIKE '%RINGS%' OR B.TITLE LIKE '%HOBBIT%')", query.asString());
     }
 }

@@ -1,6 +1,6 @@
 package stuff;
 
-class OrOperator extends BooleanOperand implements BinaryOperator<BooleanType, BooleanType>, BooleanType{
+class OrOperator extends BooleanOperand implements BinaryOperator<BooleanType, BooleanType>, BooleanType {
     private BooleanType left;
     private BooleanType right;
 
@@ -9,9 +9,11 @@ class OrOperator extends BooleanOperand implements BinaryOperator<BooleanType, B
         this.right = right;
     }
 
-    public String toString() {
-        return (left instanceof BinaryOperator ? ("(" + left.toString() + ")") : left.toString()) +
-                " OR " +
-                (right instanceof BinaryOperator ? ("(" + right.toString() + ")") : right.toString());
+    public String asString(int precedence) {
+        if (precedence > 10) {
+            return "(" + left.asString(10) + " OR " + right.asString(10) + ")";
+        } else {
+            return left.asString(10) + " OR " + right.asString(10);
+        }
     }
 }

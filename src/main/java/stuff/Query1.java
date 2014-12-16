@@ -25,6 +25,6 @@ class Query1<T1 extends TableRef> {
     }
 
     public String asString() {
-        return table1.asString() + " WHERE " + where.toString();
+        return table1.asString() + " WHERE " + where.asString(0);
     }
 }

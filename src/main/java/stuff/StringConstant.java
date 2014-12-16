@@ -10,4 +10,9 @@ class StringConstant implements StringType {
     public String toString() {
         return "'" + value + "'";
     }
+
+    @Override
+    public String asString(int precedence) {
+        return "'" + value + "'";
+    }
 }

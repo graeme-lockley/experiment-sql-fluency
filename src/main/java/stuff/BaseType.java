@@ -1,5 +1,5 @@
 package stuff;
 
 public interface BaseType {
-    String toString();
+    String asString(int precedence);
 }

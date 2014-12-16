@@ -12,4 +12,9 @@ class IntegerColumnReference extends IntegerOperation implements OrderByExpressi
     public String toString() {
         return tableName + "." + columnName;
     }
+
+    @Override
+    public String asString(int precedence) {
+        return tableName + "." + columnName;
+    }
 }

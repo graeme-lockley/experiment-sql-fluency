@@ -16,4 +16,9 @@ public class StringColumnReference extends StringOperation implements OrderByExp
     public OrderByExpression desc() {
         return new DescSortOrder(this);
     }
+
+    @Override
+    public String asString(int precedence) {
+        return tableName + "." + columnName;
+    }
 }

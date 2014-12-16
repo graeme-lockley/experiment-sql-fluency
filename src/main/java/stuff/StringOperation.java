@@ -1,6 +1,6 @@
 package stuff;
 
-public class StringOperation implements StringType {
+public abstract class StringOperation implements StringType {
     public BooleanType like(StringOperation stringOperation) {
         return new LikeOperator(this, stringOperation);
     }

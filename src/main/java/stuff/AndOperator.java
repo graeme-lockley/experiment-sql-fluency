@@ -9,9 +9,11 @@ class AndOperator extends BooleanOperand implements BinaryOperator<BooleanType, 
         this.right = right;
     }
 
-    public String toString() {
-        return (left instanceof BinaryOperator ? ("(" + left.toString() + ")") : left.toString()) +
-                " AND " +
-                (right instanceof BinaryOperator ? ("(" + right.toString() + ")") : right.toString());
+    public String asString(int precedence) {
+        if (precedence > 20) {
+            return "(" + left.asString(20) + " AND " + right.asString(20) + ")";
+        } else {
+            return left.asString(20) + " AND " + right.asString(20);
+        }
     }
 }
