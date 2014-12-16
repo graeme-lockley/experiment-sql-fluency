@@ -1,6 +1,6 @@
 package stuff;
 
-public class Book {
+public class Book implements TableRef {
     public final IntegerColumnReference BOOK_ID;
     public final StringColumnReference TITLE;
     public final IntegerColumnReference AUTHOR_ID;
@@ -21,5 +21,10 @@ public class Book {
 
     public static Book ref() {
         return new Book("BOOK");
+    }
+
+    @Override
+    public String asString() {
+        return "BOOK as " + reference;
     }
 }

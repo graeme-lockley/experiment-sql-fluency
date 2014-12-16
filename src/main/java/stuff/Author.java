@@ -21,4 +21,9 @@ public class Author implements TableRef {
     public static Author ref() {
         return new Author("AUTHOR");
     }
+
+    @Override
+    public String asString() {
+        return "AUTHOR as " + reference;
+    }
 }

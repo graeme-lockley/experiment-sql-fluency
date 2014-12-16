@@ -1,6 +1,6 @@
 package stuff;
 
-class LikeOperator extends BooleanOperation {
+class LikeOperator extends BooleanOperand implements BinaryOperator<StringType, StringType>, BooleanType {
     private StringType left;
     private StringType right;
 
@@ -15,6 +15,6 @@ class LikeOperator extends BooleanOperation {
     }
 
     public String toString() {
-        return "LIKE(" + left.toString() + ", " + right.toString() + ")";
+        return left.toString() + " LIKE " + right.toString();
     }
 }

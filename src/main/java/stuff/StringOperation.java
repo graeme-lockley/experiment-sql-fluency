@@ -5,7 +5,7 @@ public class StringOperation implements StringType {
         return new LikeOperator(this, stringOperation);
     }
 
-    public BooleanOperation like(String constantString) {
+    public BooleanOperand like(String constantString) {
         return new LikeOperator(this, new StringConstant(constantString));
     }
 

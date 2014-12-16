@@ -8,6 +8,6 @@ class StringConstant implements StringType {
     }
 
     public String toString() {
-        return "\"" + value + "\"";
+        return "'" + value + "'";
     }
 }

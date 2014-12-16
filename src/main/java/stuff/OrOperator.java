@@ -1,6 +1,6 @@
 package stuff;
 
-class OrOperator implements BooleanBinaryOperator {
+class OrOperator extends BooleanOperand implements BinaryOperator<BooleanType, BooleanType>, BooleanType{
     private BooleanType left;
     private BooleanType right;
 
