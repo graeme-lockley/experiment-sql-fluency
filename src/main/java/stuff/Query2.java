@@ -34,7 +34,7 @@ public class Query2<T1 extends TableRef, T2 extends TableRef> {
     }
 
     public String asString() {
-        return t1.asString() + ", " + t2.asString() +
+        return "FROM " + t1.asString() + ", " + t2.asString() +
                 " WHERE " +
                 onClause.map(x -> x.asString(0)).orElse("") +
                 (onClause.isPresent() && whereClause.isPresent() ? " AND " : "") +

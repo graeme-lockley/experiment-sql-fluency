@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
 public class MainTest {
@@ -11,9 +12,9 @@ public class MainTest {
     public void should_support_single_table_query() throws Exception {
         Query1<Author> query = Query.from(Author.as("A"))
                 .where(a -> a.NAME.like("%LOCKLEY%"))
-                .orderBy(a -> Arrays.asList((OrderByExpression) a.NAME));
+                .orderBy(a -> asList((OrderByExpression) a.NAME));
 
-        assertEquals("AUTHOR as A WHERE A.NAME LIKE '%LOCKLEY%'", query.asString());
+        assertEquals("FROM AUTHOR as A WHERE A.NAME LIKE '%LOCKLEY%'", query.asString());
     }
 
     @Test
@@ -24,9 +25,9 @@ public class MainTest {
                                 .and(b.TITLE.like("%RINGS%")
                                         .or(b.TITLE.like("%HOBBIT%")))
                                 .and(a.AUTHOR_ID.eq(b.AUTHOR_ID)))
-                .orderBy((a, b) -> Arrays.asList((OrderByExpression) a.NAME));
+                .orderBy((a, b) -> asList((OrderByExpression) a.NAME));
 
-        assertEquals("AUTHOR as A, BOOK as B WHERE A.NAME LIKE '%LOCKLEY%' AND (B.TITLE LIKE '%RINGS%' OR B.TITLE LIKE '%HOBBIT%') AND A.AUTHOR_ID = B.AUTHOR_ID", query.asString());
+        assertEquals("FROM AUTHOR as A, BOOK as B WHERE A.NAME LIKE '%LOCKLEY%' AND (B.TITLE LIKE '%RINGS%' OR B.TITLE LIKE '%HOBBIT%') AND A.AUTHOR_ID = B.AUTHOR_ID", query.asString());
     }
 
     @Test
@@ -38,8 +39,16 @@ public class MainTest {
                         a.NAME.like("%LOCKLEY%")
                                 .and(b.TITLE.like("%RINGS%")
                                         .or(b.TITLE.like("%HOBBIT%"))))
-                .orderBy((author, book) -> Arrays.asList((OrderByExpression) author.NAME));
+                .orderBy((author, book) -> asList((OrderByExpression) author.NAME));
 
-        assertEquals("AUTHOR as A, BOOK as B WHERE A.AUTHOR_ID = B.AUTHOR_ID AND A.NAME LIKE '%LOCKLEY%' AND (B.TITLE LIKE '%RINGS%' OR B.TITLE LIKE '%HOBBIT%')", query.asString());
+        assertEquals("FROM AUTHOR as A, BOOK as B WHERE A.AUTHOR_ID = B.AUTHOR_ID AND A.NAME LIKE '%LOCKLEY%' AND (B.TITLE LIKE '%RINGS%' OR B.TITLE LIKE '%HOBBIT%')", query.asString());
+    }
+
+    @Test
+    public void should_return_a_full_query_across_a_single_table() {
+        Record1<Author> query = Query.from(Author.as("A"))
+                .select(a -> asList(a.AUTHOR_ID, a.ID_NUMBER, a.NAME));
+
+        assertEquals("SELECT A.AUTHOR_ID, A.ID_NUMBER, A.NAME FROM AUTHOR as A", query.asString());
     }
 }
