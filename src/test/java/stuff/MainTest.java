@@ -56,12 +56,12 @@ public class MainTest {
     @Test
     public void should_support_nested_sql_queries() throws Exception {
         Record1<Author> query = Query.from(Author.as("A"))
-                .where(a -> a.ID_NUMBER.in()
+                .where(a -> a.AUTHOR_ID.in()
                         .from(Book.as("B"))
                         .where(b -> b.TITLE.like("%RINGS%"))
                         .select(b -> b.AUTHOR_ID))
                 .select(a -> asList(a.AUTHOR_ID, a.ID_NUMBER, a.NAME));
 
-        assertEquals("SELECT A.AUTHOR_ID, A.ID_NUMBER, A.NAME FROM AUTHOR as A WHERE A.ID_NUMBER = (SELECT B.AUTHOR_ID FROM BOOK as B WHERE B.TITLE LIKE '%RINGS%')", query.asString());
+        assertEquals("SELECT A.AUTHOR_ID, A.ID_NUMBER, A.NAME FROM AUTHOR as A WHERE A.AUTHOR_ID = (SELECT B.AUTHOR_ID FROM BOOK as B WHERE B.TITLE LIKE '%RINGS%')", query.asString());
     }
 }
