@@ -36,4 +36,5 @@ class Query1<T1 extends TableRef> {
     public String asString() {
         return "FROM " + t1.asString() + (where.isPresent() ? (" WHERE " + where.get().asString(0)) : "");
     }
+
 }

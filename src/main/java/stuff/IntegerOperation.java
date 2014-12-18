@@ -8,4 +8,8 @@ public abstract class IntegerOperation implements IntegerType {
     public BooleanOperation eq(int constantInt) {
         return new BooleanEqualsOperator(this, constantInt);
     }
+
+    public NestedQuery1<IntegerType> in() {
+        return new NestedQuery1<>(this);
+    }
 }
