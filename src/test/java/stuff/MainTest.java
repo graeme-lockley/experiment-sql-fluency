@@ -47,8 +47,9 @@ public class MainTest {
     @Test
     public void should_return_a_full_query_across_a_single_table() {
         Record1<Author> query = Query.from(Author.as("A"))
+                .where(a -> a.ID_NUMBER.eq(1234))
                 .select(a -> asList(a.AUTHOR_ID, a.ID_NUMBER, a.NAME));
 
-        assertEquals("SELECT A.AUTHOR_ID, A.ID_NUMBER, A.NAME FROM AUTHOR as A", query.asString());
+        assertEquals("SELECT A.AUTHOR_ID, A.ID_NUMBER, A.NAME FROM AUTHOR as A WHERE A.ID_NUMBER = 1234", query.asString());
     }
 }
